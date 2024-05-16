@@ -12,7 +12,7 @@ def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     user_data = ft.TextField(label='Введите город', width=400)
-    wather_data = ft.Text('')
+    weather_data = ft.Text('')
 
     def get_info(e):
         if len(user_data.value) < 2:
@@ -22,7 +22,7 @@ def main(page: ft.Page):
         URL = f'https://api.openweathermap.org/data/2.5/weather?q={user_data.value}&appid={API}&units=metric'
         res = requests.get(URL).json()
         temp = res['main']['temp']
-        wather_data.value = 'Погода ' + str(round(temp)) + '°С'
+        weather_data.value = 'Погода ' + str(round(temp)) + '°С'
         page.update()
 
     def change_theme(e):
@@ -38,7 +38,7 @@ def main(page: ft.Page):
             alignment=ft.MainAxisAlignment.CENTER
         ),
         ft.Row([user_data], alignment=ft.MainAxisAlignment.CENTER),
-        ft.Row([wather_data], alignment=ft.MainAxisAlignment.CENTER),
+        ft.Row([weather_data], alignment=ft.MainAxisAlignment.CENTER),
         ft.Row([ft.ElevatedButton(text='Получить', on_click=get_info)], alignment=ft.MainAxisAlignment.CENTER)
     )
 
